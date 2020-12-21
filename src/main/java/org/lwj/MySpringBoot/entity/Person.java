@@ -1,15 +1,20 @@
 package org.lwj.MySpringBoot.entity;
 
+import javax.validation.constraints.Email;
+
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
-@Component("my")
+@Component()
 @ConfigurationProperties(prefix = "myperson")
+@Validated  //校验的注解
 public class Person {
 	
 	//@Value("12")
 	private int age;
 	//@Value("aaa")
+	@Email(message="格式错误")
 	private String name;
 	//@Value("true")
 	private Boolean sex;
