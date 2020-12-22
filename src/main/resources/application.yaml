@@ -1,7 +1,13 @@
 # 对空格的要求十分高
 # 可以注入到配置中，可以给实体类赋值
-server: {port: 8081}
+server: {port: 8080}
 # pets: [aa,bb,cc]
+
+spring:
+  profiles:
+    active: test
+
+
 
 myperson: 
   name: ${random.uuid}
