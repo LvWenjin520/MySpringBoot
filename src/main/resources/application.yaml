@@ -3,6 +3,7 @@
 server: {port: 8080}
 # pets: [aa,bb,cc]
 
+#更换环境
 spring:
   profiles:
     active: test
