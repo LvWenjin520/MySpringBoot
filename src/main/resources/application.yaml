@@ -8,7 +8,7 @@ spring:
     active: test
 
 
-
+#配置自定义实体类
 myperson: 
   name: ${random.uuid}
   age: ${random.int}
