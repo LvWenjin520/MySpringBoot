@@ -1,6 +1,7 @@
 package org.lwj.MySpringBoot.config;
 
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -9,10 +10,18 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class MyMvcConfiguation implements WebMvcConfigurer{
 	
 	
-	//视图跳转控制器
+	//注册视图跳转控制器
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-		registry.addViewController("/lwj").setViewName("test01");
+		registry.addViewController("/test").setViewName("test02");
+		registry.addViewController("/test1").setViewName("test01");
 	}
+	
+	//注册拦截器
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+		registry.addInterceptor(new MyInterceptor());
+	}
+	
 	
 }

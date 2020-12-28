@@ -1,7 +1,10 @@
 package org.lwj.MySpringBoot;
 
+
+
+import javax.sql.DataSource;
+
 import org.junit.jupiter.api.Test;
-import org.lwj.MySpringBoot.entity.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -10,12 +13,10 @@ class MySpringBootApplicationTests {
 
 	
 	@Autowired()
-	//@Qualifier("my")
-	private Person person;
-	
+	DataSource dataSource;
 	@Test
 	void contextLoads() {
-		System.out.println(person);
+		System.out.println(dataSource.getClass());
 	}
 
 }
