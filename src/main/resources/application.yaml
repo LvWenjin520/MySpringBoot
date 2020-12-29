@@ -4,14 +4,15 @@ server: {port: 8080}
 # pets: [aa,bb,cc]
 
 
-  
 
 # 数据库配置
 #更换环境
 spring:
   profiles:
     active: test
-    
+  thymeleaf:
+    cache: false  
+#关闭模板引擎的缓存
 #配置自定义实体类
 myperson: 
   name: ${random.uuid}
