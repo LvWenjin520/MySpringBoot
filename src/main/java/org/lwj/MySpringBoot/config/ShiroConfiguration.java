@@ -1,5 +1,8 @@
 package org.lwj.MySpringBoot.config;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +23,23 @@ public class ShiroConfiguration {
 	public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
+		
+		//添加shiro过滤器
+		/**
+		 * anon无需认证
+		 * authc必须认证
+		 * user必须有记住我功能
+		 * perms必须有某个资源的权限才能访问
+		 * role必须有某个角色才能访问
+		 */
+		//设置过滤器
+		Map<String, String> filterMap = new LinkedHashMap<String, String>();
+		filterMap.put("/", "anon");
+		filterMap.put("/query", "authc");
+		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
+		
+		shiroFilterFactoryBean.setLoginUrl("/login");
+		
 		return shiroFilterFactoryBean;
 	}
 	
