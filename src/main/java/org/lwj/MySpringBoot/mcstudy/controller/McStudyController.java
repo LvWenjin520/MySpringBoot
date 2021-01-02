@@ -1,9 +1,9 @@
 package org.lwj.MySpringBoot.mcstudy.controller;
 
-import org.lwj.MySpringBoot.mcstudy.dao.McStudyMapper;
-import org.lwj.MySpringBoot.mcstudy.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -11,17 +11,16 @@ import org.springframework.web.bind.annotation.RestController;
  * @author user
  *
  */
-@RestController
+@RestController("/mc")
 public class McStudyController {
 	
-	@Autowired
-	McStudyMapper mcStudyMapper;
-	
-	@GetMapping("query")
-	public void queryTest() {
-		User user = mcStudyMapper.query(1);
-		System.out.println(user.getId());
+	@RequestMapping(path="/testroot")
+	public Map<String,String> testPerms(){
+		
+		Map<String,String> map = new HashMap<String, String>();
+		map.put("msg", "success");
+		
+		return map;
 	}
-	
 	
 }

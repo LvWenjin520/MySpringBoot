@@ -34,12 +34,21 @@ public class ShiroConfiguration {
 		 */
 		//设置过滤器
 		Map<String, String> filterMap = new LinkedHashMap<String, String>();
+		
+		//授权控制处理
+		filterMap.put("/mc/testroot", "roles[root]");
+		//filterMap.put("/mc/testroot", "perms[user:mc]");
+		
+		//认证过滤器
 		filterMap.put("/", "anon");
-		filterMap.put("/query", "authc");
+		filterMap.put("/mc", "authc");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 		
 		//未登录的自动跳转到登录页面
 		shiroFilterFactoryBean.setLoginUrl("tologin");
+		
+		//没有授权的请求跳转到401页面
+		shiroFilterFactoryBean.setUnauthorizedUrl("/401");
 		
 		return shiroFilterFactoryBean;
 	}
