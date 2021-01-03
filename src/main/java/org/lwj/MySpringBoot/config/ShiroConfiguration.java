@@ -3,6 +3,7 @@ package org.lwj.MySpringBoot.config;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -63,6 +64,17 @@ public class ShiroConfiguration {
 	//注入配置好的userRealm，交给spring托管
 	@Bean(name="userRealm")
 	public UserRealm userRealm() {
-		return new UserRealm();
+		
+		UserRealm userRealm = new UserRealm();
+		
+		//加密
+		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+		// 使用md5 算法进行加密
+		matcher.setHashAlgorithmName("md5");
+        // 设置散列次数： 意为加密几次
+		matcher.setHashIterations(1024);
+		
+		userRealm.setCredentialsMatcher(matcher);
+		return userRealm;
 	}
 }

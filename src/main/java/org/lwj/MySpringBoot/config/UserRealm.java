@@ -51,9 +51,6 @@ public class UserRealm extends AuthorizingRealm{
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 		//获取用户
 		//Subject subject = SecurityUtils.getSubject();
-		
-		
-		
 		UsernamePasswordToken userToken = (UsernamePasswordToken)token;
 		
 		//用户名不存在的情况
@@ -63,7 +60,7 @@ public class UserRealm extends AuthorizingRealm{
 			return null;  //没有此用户
 		}
 		// shiro比对密码的方法，密码由框架处理
-		return new SimpleAuthenticationInfo(subject,subject.getPassWord(),"");
+		return new SimpleAuthenticationInfo(subject,subject.getPassWord(),"fuckoff");
 	}
 
 }
