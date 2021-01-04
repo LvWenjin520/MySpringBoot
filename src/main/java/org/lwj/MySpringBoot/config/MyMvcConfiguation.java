@@ -14,6 +14,8 @@ public class MyMvcConfiguation implements WebMvcConfigurer{
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/mc").setViewName("pages/mc/mc");
+		registry.addViewController("/401").setViewName("error/401");
+	
 	}
 	
 	//注册拦截器

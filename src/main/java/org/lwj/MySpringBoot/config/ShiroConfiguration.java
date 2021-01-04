@@ -3,6 +3,7 @@ package org.lwj.MySpringBoot.config;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
@@ -34,12 +35,21 @@ public class ShiroConfiguration {
 		 */
 		//设置过滤器
 		Map<String, String> filterMap = new LinkedHashMap<String, String>();
+		
+		//授权控制处理
+		filterMap.put("/mc/testroot", "roles[root]");
+		//filterMap.put("/mc/testroot", "perms[user:mc]");
+		
+		//认证过滤器
 		filterMap.put("/", "anon");
-		filterMap.put("/query", "authc");
+		filterMap.put("/mc", "authc");
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 		
 		//未登录的自动跳转到登录页面
 		shiroFilterFactoryBean.setLoginUrl("login");
+		
+		//没有授权的请求跳转到401页面
+		shiroFilterFactoryBean.setUnauthorizedUrl("/401");
 		
 		return shiroFilterFactoryBean;
 	}
@@ -75,6 +85,17 @@ public class ShiroConfiguration {
 	//注入配置好的userRealm，交给spring托管
 	@Bean(name="userRealm")
 	public UserRealm userRealm() {
-		return new UserRealm();
+		
+		UserRealm userRealm = new UserRealm();
+		
+		//加密
+		HashedCredentialsMatcher matcher = new HashedCredentialsMatcher();
+		// 使用md5 算法进行加密
+		matcher.setHashAlgorithmName("md5");
+        // 设置散列次数： 意为加密几次
+		matcher.setHashIterations(1024);
+		
+		userRealm.setCredentialsMatcher(matcher);
+		return userRealm;
 	}
 }
