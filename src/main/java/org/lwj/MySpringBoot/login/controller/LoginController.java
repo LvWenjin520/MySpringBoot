@@ -9,15 +9,15 @@ import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller()
 public class LoginController {
 	
-	@GetMapping("/tologin")
+	@RequestMapping(path="/login",method=RequestMethod.GET)
 	public String toLogin() {
 		return "pages/login";
 	}
@@ -26,7 +26,7 @@ public class LoginController {
 	 * 认证的方法
 	 * @return
 	 */
-	@PostMapping("/login")
+	@RequestMapping(path="/login",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,String> login(
 			@RequestParam String username,

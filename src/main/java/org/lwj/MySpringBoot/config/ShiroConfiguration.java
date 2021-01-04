@@ -5,6 +5,7 @@ import java.util.Map;
 
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.session.mgt.DefaultWebSessionManager;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -23,7 +24,6 @@ public class ShiroConfiguration {
 	public ShiroFilterFactoryBean getShiroFilterFactoryBean(@Qualifier("securityManager") DefaultWebSecurityManager securityManager) {
 		ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 		shiroFilterFactoryBean.setSecurityManager(securityManager);
-		
 		//添加shiro过滤器
 		/**
 		 * anon无需认证
@@ -39,18 +39,39 @@ public class ShiroConfiguration {
 		shiroFilterFactoryBean.setFilterChainDefinitionMap(filterMap);
 		
 		//未登录的自动跳转到登录页面
-		shiroFilterFactoryBean.setLoginUrl("tologin");
+		shiroFilterFactoryBean.setLoginUrl("login");
 		
 		return shiroFilterFactoryBean;
 	}
 	
+	
+	
+	
 	//生成WebSecurityManager                                       绑定下面的realm
 	@Bean(name="securityManager")
-	public DefaultWebSecurityManager getDefaultWebSecurityManager(@Qualifier("userRealm") UserRealm userRealm) {
+	public DefaultWebSecurityManager getDefaultWebSecurityManager(
+			@Qualifier("userRealm") UserRealm userRealm,
+			@Qualifier("sessionManager") DefaultWebSessionManager sessionManager) {
 		DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
+		securityManager.setSessionManager(sessionManager);
 		securityManager.setRealm(userRealm);
 		return securityManager;
 	}
+	
+	
+	/**
+	 * 处理session
+	 * @return
+	 */
+	@Bean("sessionManager")
+	public DefaultWebSessionManager getDefaultWebSessionManager() {
+		DefaultWebSessionManager manager = new DefaultWebSessionManager();
+		//解决重定向后的自动添加JSessionId的问题
+		manager.setSessionIdUrlRewritingEnabled(false);
+		return manager;
+	}
+	
+	
 	//注入配置好的userRealm，交给spring托管
 	@Bean(name="userRealm")
 	public UserRealm userRealm() {

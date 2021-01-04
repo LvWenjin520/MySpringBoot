@@ -29,6 +29,6 @@ spring:
     connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
     
 mybatis:
-  type-aliases-package: org.lwj.MySpringBoot.mcstudy.entity
+  type-aliases-package: org.lwj.MySpringBoot.**.entity
   mapper-locations: classpath:mybatis/mappers/*.xml 
     

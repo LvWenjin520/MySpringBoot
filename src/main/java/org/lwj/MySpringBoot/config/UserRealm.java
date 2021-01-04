@@ -26,7 +26,6 @@ public class UserRealm extends AuthorizingRealm{
 	//认证
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
-		System.out.println("执行了认证");
 		//获取用户
 		//Subject subject = SecurityUtils.getSubject();
 		//在这里从数据库获取用户名密码
