@@ -82,6 +82,9 @@ public class ShiroConfiguration {
 	}
 	
 	
+	
+	
+	
 	//注入配置好的userRealm，交给spring托管
 	@Bean(name="userRealm")
 	public UserRealm userRealm() {

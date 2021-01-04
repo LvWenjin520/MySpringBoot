@@ -2,22 +2,30 @@ package org.lwj.MySpringBoot.login.controller;
 
 import java.util.Map;
 
+import org.lwj.MySpringBoot.login.entity.User;
+import org.lwj.MySpringBoot.login.service.RegisterService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import utils.jsonmsg.JsonMsg;
-
-@RestController("/register")
+@RestController()
 public class RegisterController {
 	
-	@RequestMapping("/register")
+	
+	@Autowired
+	RegisterService registerService;
+	
+	@RequestMapping(path="/register",method=RequestMethod.POST)
 	public Map<String,String> register(
 			@RequestParam String username,
 			@RequestParam String password
 			) {
 		
-		return JsonMsg.success("register Success");
+		Map<String, String> result = registerService.register(new User(username,password));
+		
+		return result;
 	}
 	
 }

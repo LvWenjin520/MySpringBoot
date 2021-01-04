@@ -60,7 +60,7 @@ public class UserRealm extends AuthorizingRealm{
 			return null;  //没有此用户
 		}
 		// shiro比对密码的方法，密码由框架处理
-		return new SimpleAuthenticationInfo(subject,subject.getPassWord(),"fuckoff");
+		return new SimpleAuthenticationInfo(subject,subject.getPassWord(),getName());
 	}
 
 }

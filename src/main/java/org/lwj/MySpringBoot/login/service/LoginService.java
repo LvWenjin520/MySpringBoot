@@ -11,5 +11,4 @@ public interface LoginService {
 	
 	User getSubject(String userName);
 	
-	boolean register(User user);
 }

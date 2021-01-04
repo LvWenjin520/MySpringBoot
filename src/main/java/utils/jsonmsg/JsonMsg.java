@@ -22,5 +22,12 @@ public class JsonMsg {
 		return map;
 	}
 	
+	//失败
+	public static Map<String,String> faild(String msg) {
+		HashMap<String,String> map = new HashMap<String,String>();
+		map.put("flag", "faild");
+		map.put("msg", msg);
+		return map;
+	}
 	
 }
