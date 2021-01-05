@@ -1,4 +1,4 @@
-package org.lwj.MySpringBoot.config;
+package org.lwj.MySpringBoot.config.mvc;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
@@ -15,7 +15,7 @@ public class MyMvcConfiguation implements WebMvcConfigurer{
 	public void addViewControllers(ViewControllerRegistry registry) {
 		registry.addViewController("/mc").setViewName("pages/mc/mc");
 		registry.addViewController("/401").setViewName("error/401");
-	
+		registry.addViewController("/hello").setViewName("pages/user/userIndex");
 	}
 	
 	//注册拦截器

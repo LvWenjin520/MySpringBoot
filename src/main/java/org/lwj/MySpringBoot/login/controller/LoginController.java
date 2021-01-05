@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller()
+@RequestMapping("/login")
 public class LoginController {
 	
 	@RequestMapping(path="/login",method=RequestMethod.GET)

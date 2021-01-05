@@ -11,7 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author user
  *
  */
-@RestController("/mc")
+@RestController()
+@RequestMapping("/mc")
 public class McStudyController {
 	
 	@RequestMapping(path="/testroot")

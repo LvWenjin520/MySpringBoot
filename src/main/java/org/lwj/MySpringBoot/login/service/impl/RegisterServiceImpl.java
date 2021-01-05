@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.apache.shiro.crypto.hash.Md5Hash;
 import org.lwj.MySpringBoot.login.dao.RegisterDao;
+import org.lwj.MySpringBoot.login.dao.UserDao;
 import org.lwj.MySpringBoot.login.entity.User;
 import org.lwj.MySpringBoot.login.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,11 +13,14 @@ import org.springframework.stereotype.Service;
 import utils.jsonmsg.JsonMsg;
 
 
-@Service("register")
+@Service()
 public class RegisterServiceImpl implements RegisterService{
 
 	@Autowired
 	RegisterDao registerDao;
+	
+	@Autowired
+	UserDao userDao;
 	
 	@Override
 	public Map<String, String> register(User user) {
@@ -27,14 +31,18 @@ public class RegisterServiceImpl implements RegisterService{
 		//更新加密后的密码
 		user.setPassWord(password);
 		
-		//插入用户信息
-		boolean insertUser = registerDao.insertUser(user);
+		int userNum = userDao.queryUserNumByUserName(user.getUserName());
 		
-		if(insertUser) {
-			return JsonMsg.success("注册成功");
+		int insertFlag = 0;
+		if(userNum == 0) {
+			insertFlag = registerDao.insertUser(user);
+			if(insertFlag == 1) {
+				return JsonMsg.success("注册成功");
+			}
+		}else if(userNum == 1) {
+			return JsonMsg.faild("用户名已存在");
 		}
-		
-		return JsonMsg.faild("注册失败");
+		return JsonMsg.faild("系统错误");
 	}
 	
 	

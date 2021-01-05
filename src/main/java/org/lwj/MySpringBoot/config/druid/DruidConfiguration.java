@@ -1,4 +1,4 @@
-package org.lwj.MySpringBoot.config;
+package org.lwj.MySpringBoot.config.druid;
 
 import java.util.HashMap;
 
@@ -25,7 +25,7 @@ public class DruidConfiguration {
 	 * 后台监控,固定写法
 	 */
 	@Bean
-	public ServletRegistrationBean statViewServlet(){
+	public ServletRegistrationBean<StatViewServlet> statViewServlet(){
 		ServletRegistrationBean<StatViewServlet> bean = new ServletRegistrationBean<>(new StatViewServlet(),"/druid/*");
 		
 		//配置账号密码

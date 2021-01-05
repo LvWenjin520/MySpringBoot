@@ -2,9 +2,11 @@ package org.lwj.MySpringBoot;
 
 
 
-import javax.sql.DataSource;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
+import org.lwj.MySpringBoot.login.entity.User;
+import org.lwj.MySpringBoot.login.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -12,11 +14,16 @@ import org.springframework.boot.test.context.SpringBootTest;
 class MySpringBootApplicationTests {
 
 	
-	@Autowired()
-	DataSource dataSource;
+	@Autowired
+	RegisterService registerService;
+	
 	@Test
-	void contextLoads() {
-		System.out.println(dataSource.getClass());
+	void contextLoads(){
+		
+		User user = new User("lll","333333");
+		Map<String, String> insertUser = registerService.register(user);
+		System.out.println(insertUser.toString());
+		
 	}
 
 }

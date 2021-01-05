@@ -1,4 +1,4 @@
-package org.lwj.MySpringBoot.config;
+package org.lwj.MySpringBoot.config.shiro;
 
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
@@ -11,6 +11,7 @@ import org.apache.shiro.authz.SimpleAuthorizationInfo;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.lwj.MySpringBoot.login.entity.User;
 import org.lwj.MySpringBoot.login.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,13 +55,16 @@ public class UserRealm extends AuthorizingRealm{
 		UsernamePasswordToken userToken = (UsernamePasswordToken)token;
 		
 		//用户名不存在的情况
-		User subject = loginService.getSubject(userToken.getUsername());
+		User user = loginService.getSubject(userToken.getUsername());
 		
-		if(null == subject) {
+		if(null == user) {
 			return null;  //没有此用户
 		}
+		// 盐值。使用 fuckoff作为盐值，盐值必须是唯一的
+        ByteSource credentialsSalt = ByteSource.Util.bytes("fuckoff");
+		
 		// shiro比对密码的方法，密码由框架处理
-		return new SimpleAuthenticationInfo(subject,subject.getPassWord(),getName());
+		return new SimpleAuthenticationInfo(user,user.getPassWord(),credentialsSalt,getName());
 	}
 
 }

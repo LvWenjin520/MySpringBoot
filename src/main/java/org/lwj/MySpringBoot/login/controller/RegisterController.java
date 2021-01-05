@@ -11,13 +11,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
+@RequestMapping("/register")
 public class RegisterController {
 	
 	
 	@Autowired
 	RegisterService registerService;
 	
-	@RequestMapping(path="/register",method=RequestMethod.POST)
+	@RequestMapping(path="/regist",method=RequestMethod.POST)
 	public Map<String,String> register(
 			@RequestParam String username,
 			@RequestParam String password

@@ -1,4 +1,4 @@
-package org.lwj.MySpringBoot.config;
+package org.lwj.MySpringBoot.config.mvc;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
