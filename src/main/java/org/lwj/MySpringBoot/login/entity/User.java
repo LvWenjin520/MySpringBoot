@@ -1,11 +1,13 @@
 package org.lwj.MySpringBoot.login.entity;
 
+import java.io.Serializable;
+
 /**
  * 用户的实体类
  * @author LvWenJin
  *
  */
-public class User {
+public class User implements Serializable{
 	private int id;
 	private String userName;
 	private String passWord;

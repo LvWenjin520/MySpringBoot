@@ -9,6 +9,7 @@ import org.lwj.MySpringBoot.login.entity.User;
  */
 public interface LoginService {
 	
+	//获取用户
 	User getSubject(String userName);
 	
 }

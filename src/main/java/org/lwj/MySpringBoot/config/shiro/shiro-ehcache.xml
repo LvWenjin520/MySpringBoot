@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd"
+         updateCheck="false"
+         monitoring="autodetect"
+         dynamicConfig="true">
+
+　　<!-- 设置默认临时文件路径 -->
+    <diskStore path="java.io.tmpdir"/>
+    
+<!-- 授权的缓存 -->
+<cache name="authorizationCache"
+       maxEntriesLocalHeap="1000"
+       maxEntriesLocalDisk="1000"
+       eternal="false"
+       diskSpoolBufferSizeMB="20"
+       timeToIdleSeconds="7200"
+       timeToLiveSeconds="28800"
+       memoryStoreEvictionPolicy="LFU"
+       transactionalMode="off">
+</cache>
+
+ <!-- 认证缓存 -->
+<cache name="authenticationCache"
+       maxEntriesLocalHeap="2000"
+       eternal="false"
+       timeToIdleSeconds="3600"
+       timeToLiveSeconds="0"
+       overflowToDisk="false"
+       statistics="true">
+</cache> 
+
+<!-- session缓存 -->
+<cache name="shiro-activeSessionCache"
+       maxEntriesLocalHeap="2000"
+       eternal="false"
+       timeToIdleSeconds="0"
+       timeToLiveSeconds="0"
+       overflowToDisk="false"
+       statistics="true">
+</cache>
+<defaultCache    
+    maxElementsInMemory="10000"    
+    maxElementsOnDisk="0"    
+    eternal="true"    
+    overflowToDisk="true"    
+    diskPersistent="false"    
+    timeToIdleSeconds="0"    
+    timeToLiveSeconds="0"    
+    diskSpoolBufferSizeMB="50"    
+    diskExpiryThreadIntervalSeconds="120"    
+    memoryStoreEvictionPolicy="LFU"    
+    />
+
+</ehcache>

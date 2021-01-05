@@ -3,6 +3,9 @@ package org.lwj.MySpringBoot.login.controller;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -30,6 +33,7 @@ public class LoginController {
 	@RequestMapping(path="/login",method=RequestMethod.POST)
 	@ResponseBody
 	public Map<String,String> login(
+			HttpServletRequest request,
 			@RequestParam String username,
 			@RequestParam String password){
 		
@@ -45,6 +49,12 @@ public class LoginController {
 		try{
 			subject.login(token);
 			result.put("msg", "success");
+			
+			HttpSession session = request.getSession();
+			//在会话中存入用户
+			session.setAttribute("user",username);
+			
+			
 			return result;
 		}catch(UnknownAccountException e) { //用户名不存在
 			result.put("msg", "nouser");

@@ -42,7 +42,8 @@ public class UserRealm extends AuthorizingRealm{
 		
 		//获取当前用户的权限，然后再在请求那里鉴权
 		//info.addStringPermission(user.getRoles());
-		info.addRole(user.getRoles());
+		//info.addRole(user.getRoles());
+		info.addRole("root");
 		// TODO 自动生成的方法存根
 		return info;
 	}
@@ -50,6 +51,8 @@ public class UserRealm extends AuthorizingRealm{
 	//认证
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
+		
+		
 		//获取用户
 		//Subject subject = SecurityUtils.getSubject();
 		UsernamePasswordToken userToken = (UsernamePasswordToken)token;
