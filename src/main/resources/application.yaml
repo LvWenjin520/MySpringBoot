@@ -8,6 +8,16 @@ server: {port: 8080}
 # 数据库配置
 #更换环境
 spring:
+  mail:
+    username: 972950811@qq.com
+    password: yhtjjwmnitmebeif
+    host: smtp.qq.com
+    properties:
+      mail:
+        smtp:
+          ssl:
+            enable:
+              true
   profiles:
     active: test
   thymeleaf:

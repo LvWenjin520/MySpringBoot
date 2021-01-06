@@ -22,6 +22,7 @@ public class RegisterServiceImpl implements RegisterService{
 	@Autowired
 	UserDao userDao;
 	
+	//@Async //此任务为异步任务
 	@Override
 	public Map<String, String> register(User user) {
 		//加密

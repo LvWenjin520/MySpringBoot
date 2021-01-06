@@ -2,28 +2,56 @@ package org.lwj.MySpringBoot;
 
 
 
-import java.util.Map;
+import java.io.File;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 import org.junit.jupiter.api.Test;
-import org.lwj.MySpringBoot.login.entity.User;
-import org.lwj.MySpringBoot.login.service.RegisterService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.mail.javamail.MimeMessageHelper;
 
 @SpringBootTest
 class MySpringBootApplicationTests {
 
 	
 	@Autowired
-	RegisterService registerService;
+	JavaMailSenderImpl javaMail;
 	
+	//发送简单的邮件
 	@Test
 	void contextLoads(){
-		
-		User user = new User("lll","333333");
-		Map<String, String> insertUser = registerService.register(user);
-		System.out.println(insertUser.toString());
-		
+		SimpleMailMessage simpleMessage = new SimpleMailMessage();
+		//标题
+		simpleMessage.setSubject("我是主题");
+		//正文
+		simpleMessage.setText("hello world");
+		//发给谁
+		simpleMessage.setTo("645991686@qq.com");
+		//从哪儿接受
+		simpleMessage.setFrom("972950811@qq.com");
+		javaMail.send(simpleMessage);
 	}
+	
+	//发送复杂的邮件
+	@Test
+	void contextLoads2() throws MessagingException{
+		//复杂的邮件
+		MimeMessage createMimeMessage = javaMail.createMimeMessage();
+		//组装,true是可以解析html
+		MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(createMimeMessage,true);
+		
+		mimeMessageHelper.setSubject("你好，我是主题");
+		mimeMessageHelper.setText("<a href='#'>点我</a>", true);
+		mimeMessageHelper.addAttachment("文档.txt",new File("D:\\Git\\project\\MySpringBoot\\src\\main\\resources\\docs\\文档.txt") );
+		
+		mimeMessageHelper.setTo("645991686@qq.com");
+		mimeMessageHelper.setFrom("972950811@qq.com");
+		javaMail.send(createMimeMessage);
+	}
+	
 
 }
