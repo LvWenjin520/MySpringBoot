@@ -1,6 +1,5 @@
 package org.lwj.MySpringBoot.login.controller;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import utils.jsonmsg.JsonMsg;
 
 @Controller()
 @RequestMapping("/login")
@@ -36,32 +37,27 @@ public class LoginController {
 			HttpServletRequest request,
 			@RequestParam String username,
 			@RequestParam String password){
-		
-		Map<String,String> result = new HashMap<String, String>();
-		
 		//获取当前用户
 		Subject subject = SecurityUtils.getSubject();
-		
 		//获取当前传来的用户名密码
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
+		
+		//如果已经登录过了
+		if(subject.isAuthenticated()) {
+			return JsonMsg.success("authenticated");
+		}
 		
 		//做登录处理
 		try{
 			subject.login(token);
-			result.put("msg", "success");
-			
 			HttpSession session = request.getSession();
 			//在会话中存入用户
 			session.setAttribute("user",username);
-			
-			
-			return result;
+			return JsonMsg.success("success");
 		}catch(UnknownAccountException e) { //用户名不存在
-			result.put("msg", "nouser");
-			return result;
+			return JsonMsg.faild("no user");
 		}catch(IncorrectCredentialsException e) { //密码错误
-			result.put("msg", "wrongpassword");
-			return result;
+			return JsonMsg.faild("woring password");
 		}
 	}
 	

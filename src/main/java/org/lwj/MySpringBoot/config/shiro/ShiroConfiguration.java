@@ -54,8 +54,8 @@ public class ShiroConfiguration {
 		filterMap.put("/login/**", "anon");
 		
 		//需要登录的请求
-		filterMap.put("/hello", "authc");
-		filterMap.put("/mc/**", "authc");
+		filterMap.put("/hello", "authc"); //只要是登录的
+		filterMap.put("/mc/**", "authc"); 
 		
 		
 		//登出请求
@@ -98,17 +98,17 @@ public class ShiroConfiguration {
 	 */
 	@Bean("sessionManager")
 	public DefaultWebSessionManager getDefaultWebSessionManager(
-			@Qualifier("sessionDAO") SessionDAO sessionDao
+			@Qualifier("sessionDAO") SessionDAO sessionDao,
+			@Qualifier("sessionIdCookie") SimpleCookie sessionIdCookie
 			) {
 		DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
 	    Collection<SessionListener> listeners = new ArrayList<SessionListener>();
 	    //配置监听
 	    listeners.add(getSessionListener());
 	    sessionManager.setSessionListeners(listeners);
-	    sessionManager.setSessionIdCookie(sessionIdCookie());
-	    sessionManager.setSessionDAO(sessionDAO());
+	    sessionManager.setSessionIdCookie(sessionIdCookie);
+	    sessionManager.setSessionDAO(sessionDao);
 	    sessionManager.setCacheManager(getEhCacheManager());
-
 	    //全局会话超时时间（单位毫秒），默认30分钟  暂时设置为10秒钟 用来测试
 	    //sessionManager.setGlobalSessionTimeout(10000);
 	    //是否开启删除无效的session对象  默认为true
@@ -142,7 +142,7 @@ public class ShiroConfiguration {
 	 * 配置会话ID生成器
 	 * @return
 	 */
-	@Bean
+	@Bean("sessionIdGenerator")
 	public SessionIdGenerator sessionIdGenerator() {
 	    return new JavaUuidSessionIdGenerator();
 	}
@@ -153,14 +153,18 @@ public class ShiroConfiguration {
 	 * @return
 	 */
 	@Bean("sessionDAO")
-	public SessionDAO sessionDAO() {
+	public SessionDAO sessionDAO(
+			@Qualifier("sessionIdGenerator") SessionIdGenerator sessionIdGenerator,
+			@Qualifier("ehCacheManager") EhCacheManager ehCacheManager
+			
+			) {
 	    EnterpriseCacheSessionDAO enterpriseCacheSessionDAO = new EnterpriseCacheSessionDAO();
 	    //使用ehCacheManager
-	    enterpriseCacheSessionDAO.setCacheManager(getEhCacheManager());
+	    enterpriseCacheSessionDAO.setCacheManager(ehCacheManager);
 	    //设置session缓存的名字 默认为 shiro-activeSessionCache
 	    enterpriseCacheSessionDAO.setActiveSessionsCacheName("shiro-activeSessionCache");
 	    //sessionId生成器
-	    enterpriseCacheSessionDAO.setSessionIdGenerator(sessionIdGenerator());
+	    enterpriseCacheSessionDAO.setSessionIdGenerator(sessionIdGenerator);
 	    return enterpriseCacheSessionDAO;
 	}
 	
@@ -232,7 +236,6 @@ public class ShiroConfiguration {
 		userRealm.setAuthenticationCacheName("authenticationCache");
 		//设置授权缓存名
 		userRealm.setAuthorizationCacheName("authorizationCache");
-		
 		//配置自定义缓存
 		userRealm.setCacheManager(ehCacheManager);
 		return userRealm;

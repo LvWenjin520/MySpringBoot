@@ -25,7 +25,7 @@ public class ShiroSessionListener implements SessionListener{
 	public void onStart(Session session) {
 		//会话创建在线人数加一
 		sessionCount.incrementAndGet();
-		System.out.println("session已创建，在线人数："+sessionCount+"--用户为："+session.getAttribute("user"));
+		System.out.println("session已创建，在线人数："+sessionCount);
 	}
 
 	/**
@@ -34,7 +34,7 @@ public class ShiroSessionListener implements SessionListener{
 	@Override
 	public void onStop(Session session) {
 		sessionCount.decrementAndGet();
-		System.out.println("session已销毁，在线人数："+sessionCount);
+		System.out.println("session已销毁，在线人数："+sessionCount+"--"+session.getLastAccessTime()+"--"+session.getStartTimestamp());
 	}
 
 	/**

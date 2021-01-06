@@ -66,7 +66,7 @@
         // SOUND TEXT TOGGLE
         $(".sound .equalizer").on('click', function(e) {
             $(".sound b").text(function(i, v) {
-                return v === 'Sound on' ? 'Sound off' : 'Sound on'
+                return v === 'dancing bars' ? 'bars stop' : 'dancing bars'
             })
         });
 
@@ -86,11 +86,14 @@
                 var url = this.getAttribute("href");
                 if (url.indexOf('#') != -1) {
                     var hash = url.substring(url.indexOf('#'));
-                    if ($('body ' + hash).length != 0) {
-                        $('.page-transition').removeClass("active");
-                        $(".sandiwch").toggleClass("open");
-                        $(".site-menavigation").removeClass("active");
+                    if(hash != '#'){
+                    	if ($('body' + hash).length != 0) {
+                            $('.page-transition').removeClass("active");
+                            $(".sandiwch").toggleClass("open");
+                            $(".site-menavigation").removeClass("active");
+                        }
                     }
+                    
                 } else {
                     $('.page-transition').toggleClass("active");
                     setTimeout(function() {
@@ -274,7 +277,7 @@
 
 
     // EQUALIZER TOGGLE
-    var source = "audio/audio01.mp3";
+    /*var source = "audio/audio01.mp3";
     var audio = new Audio(); // use the constructor in JavaScript, just easier that way
     audio.addEventListener("load", function() {
         audio.play();
@@ -295,7 +298,7 @@
             audio.pause();
             playing = false;
         }
-    });
+    });*/
 
 
     // EQUALIZER
