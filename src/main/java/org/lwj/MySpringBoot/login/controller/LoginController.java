@@ -5,6 +5,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -22,8 +24,12 @@ import utils.jsonmsg.JsonMsg;
 @RequestMapping("/login")
 public class LoginController {
 	
+	Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
+	
+	
 	@RequestMapping(path="/login",method=RequestMethod.GET)
 	public String toLogin() {
+		logger.info("登录");
 		return "pages/login";
 	}
 	
