@@ -1,5 +1,5 @@
 package org.lwj.MySpringBoot.dubbo.service;
 
-public interface TestService {
+public interface MyDubboService {
 	String test01();
 }

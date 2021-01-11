@@ -8,12 +8,14 @@ import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
 import org.apache.dubbo.config.annotation.Reference;
-import org.lwj.MySpringBoot.dubbo.service.TestService;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.mail.javamail.MimeMessageHelper;
+
+import test.service.TestService;
 
 @SpringBootTest
 class MySpringBootApplicationTests {
@@ -25,10 +27,10 @@ class MySpringBootApplicationTests {
 	@Reference
 	TestService testService;
 	
-	
+	@Test
 	void testDubbo() {
-		String test01 = testService.test01();
-		System.out.println(test01);
+		String test = testService.test();
+		System.out.println(test);
 	}
 	
 	
