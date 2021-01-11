@@ -7,7 +7,8 @@ import java.io.File;
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 
-import org.junit.jupiter.api.Test;
+import org.apache.dubbo.config.annotation.Reference;
+import org.lwj.MySpringBoot.dubbo.service.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,8 +22,18 @@ class MySpringBootApplicationTests {
 	@Autowired
 	JavaMailSenderImpl javaMail;
 	
+	@Reference
+	TestService testService;
+	
+	
+	void testDubbo() {
+		String test01 = testService.test01();
+		System.out.println(test01);
+	}
+	
+	
 	//发送简单的邮件
-	@Test
+	//@Test
 	void contextLoads(){
 		SimpleMailMessage simpleMessage = new SimpleMailMessage();
 		//标题
@@ -37,7 +48,7 @@ class MySpringBootApplicationTests {
 	}
 	
 	//发送复杂的邮件
-	@Test
+	//@Test
 	void contextLoads2() throws MessagingException{
 		//复杂的邮件
 		MimeMessage createMimeMessage = javaMail.createMimeMessage();

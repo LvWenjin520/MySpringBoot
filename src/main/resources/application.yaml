@@ -28,3 +28,11 @@ myperson:
   name: ${random.uuid}
   age: ${random.int}
   sex: false
+  
+  
+  
+dubbo:
+  application:
+    name: MySpringBoot
+  registry:
+    address: zookeeper://139.224.254.0:2181
