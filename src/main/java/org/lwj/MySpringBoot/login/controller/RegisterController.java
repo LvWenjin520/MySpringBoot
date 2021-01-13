@@ -2,21 +2,23 @@ package org.lwj.MySpringBoot.login.controller;
 
 import java.util.Map;
 
-import org.lwj.MySpringBoot.login.entity.User;
-import org.lwj.MySpringBoot.login.service.RegisterService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import entitys.user.entity.User;
+import services.user.service.UserService;
+import utils.jsonmsg.JsonMsg;
+
 @RestController()
 @RequestMapping("/register")
 public class RegisterController {
 	
-	
-	@Autowired
-	RegisterService registerService;
+	//Dubbo的引用注解
+	@Reference
+	UserService UserService;
 	
 	@RequestMapping(path="/regist",method=RequestMethod.POST)
 	public Map<String,String> register(
@@ -24,9 +26,16 @@ public class RegisterController {
 			@RequestParam String password
 			) {
 		
-		Map<String, String> result = registerService.register(new User(username,password));
+		User user = new User(username,password);
+		int result = UserService.insertUser(user);
 		
-		return result;
+		if(result == 1) {
+			return JsonMsg.success("注册成功");
+		}else if(result == 0) {
+			return JsonMsg.faild("此用户已存在");
+		}
+		
+		return JsonMsg.faild("系统错误");
 	}
 	
 }

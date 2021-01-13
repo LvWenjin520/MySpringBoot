@@ -1,2 +1,3 @@
 数据监控url：localhost:8080/druid
 接口监控url：localhost:8080/swagger-ui.html  
+dubbo-admin监控：localhost:7001

@@ -1,6 +1,6 @@
 # 对空格的要求十分高
 # 可以注入到配置中，可以给实体类赋值
-server: {port: 8080}
+server: {port: 8002}
 # pets: [aa,bb,cc]
 
 
@@ -30,7 +30,7 @@ myperson:
   sex: false
   
   
-  
+#获取远程服务的配置
 dubbo:
   application:
     name: MySpringBoot
