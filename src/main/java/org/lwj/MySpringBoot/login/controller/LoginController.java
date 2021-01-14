@@ -26,9 +26,9 @@ public class LoginController {
 	
 	Logger logger = LogManager.getLogger(LogManager.ROOT_LOGGER_NAME);
 	
-	
 	@RequestMapping(path="/login",method=RequestMethod.GET)
 	public String toLogin() {
+		logger.debug("正在登录");
 		return "pages/login";
 	}
 	

@@ -1,5 +1,6 @@
 package org.lwj.MySpringBoot.config.shiro;
 
+import org.apache.dubbo.config.annotation.Reference;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -12,9 +13,9 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.ByteSource;
-import org.lwj.MySpringBoot.login.entity.User;
-import org.lwj.MySpringBoot.login.service.LoginService;
-import org.springframework.beans.factory.annotation.Autowired;
+
+import entitys.user.entity.User;
+import services.user.service.UserService;
 
 /**
  * 自定义Realm
@@ -24,8 +25,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class UserRealm extends AuthorizingRealm{
 
 	
-	@Autowired
-	LoginService loginService;
+	@Reference
+	UserService userService;
 	
 	//授权
 	@Override
@@ -42,7 +43,7 @@ public class UserRealm extends AuthorizingRealm{
 		
 		//获取当前用户的权限，然后再在请求那里鉴权
 		//info.addStringPermission(user.getRoles());
-		info.addRole(user.getRoles());
+		//info.addRole(user.getRoles());
 		info.addRole("root");
 		// TODO 自动生成的方法存根
 		return info;
@@ -58,7 +59,7 @@ public class UserRealm extends AuthorizingRealm{
 		UsernamePasswordToken userToken = (UsernamePasswordToken)token;
 		
 		//用户名不存在的情况
-		User user = loginService.getSubject(userToken.getUsername());
+		User user = userService.getUser(userToken.getUsername());
 		
 		if(null == user) {
 			return null;  //没有此用户

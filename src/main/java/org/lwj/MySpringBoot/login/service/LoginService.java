@@ -1,6 +1,6 @@
 package org.lwj.MySpringBoot.login.service;
 
-import org.lwj.MySpringBoot.login.entity.User;
+import entitys.user.entity.User;
 
 /***
  * 用户登录
@@ -10,6 +10,6 @@ import org.lwj.MySpringBoot.login.entity.User;
 public interface LoginService {
 	
 	//获取用户
-	User getSubject(String userName);
+	User getUser(String userName);
 	
 }

@@ -46,8 +46,6 @@ public class ShiroConfiguration {
 		Map<String, String> filterMap = new LinkedHashMap<String, String>();
 		
 		//授权控制处理
-		
-		filterMap.put("/druid/**", "roles[root]");
 		filterMap.put("/swagger-ui.html/**", "roles[root]");
 		filterMap.put("/mc/testroot", "roles[root]");
 		//filterMap.put("/mc/testroot", "perms[user:mc]");
@@ -59,8 +57,6 @@ public class ShiroConfiguration {
 		//需要登录的请求
 		filterMap.put("/hello", "authc"); //只要是登录的
 		filterMap.put("/mc/**", "authc"); 
-		/*	filterMap.put("/druid/**", "authc");
-			filterMap.put("/swagger-ui.html/**", "authc");*/
 		
 		//登出请求
 		filterMap.put("/logout", "logout");

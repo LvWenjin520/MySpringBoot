@@ -18,8 +18,6 @@ spring:
           ssl:
             enable:
               true
-  profiles:
-    active: test
   thymeleaf:
     cache: false  
 #关闭模板引擎的缓存
