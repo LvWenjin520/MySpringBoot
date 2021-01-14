@@ -29,7 +29,6 @@ public class LoginController {
 	
 	@RequestMapping(path="/login",method=RequestMethod.GET)
 	public String toLogin() {
-		logger.info("登录");
 		return "pages/login";
 	}
 	

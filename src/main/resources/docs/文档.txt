@@ -1,3 +1,6 @@
+
+此项目为前端服务器以及权限管理服务器，这里只处理简单的业务，大部分业务都放在了服务提供者那里
+
 数据监控url：localhost:8080/druid
 接口监控url：localhost:8080/swagger-ui.html  
 dubbo-admin监控：localhost:7001
