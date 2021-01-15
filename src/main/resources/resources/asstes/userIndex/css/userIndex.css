@@ -10,6 +10,10 @@ html,body{
 	height: 100%;
 }
 
+.article_cards{
+	margin-top: 30px;
+}
+
 .article_title_input{
 	position:relative;
 	top: 100px; 
@@ -28,3 +32,10 @@ html,body{
 	font-weight: 500;
 }
 
+#dateplugins{
+	height: 30px;
+}
+
+.date_search_btn{
+	margin-bottom: 10px;
+}

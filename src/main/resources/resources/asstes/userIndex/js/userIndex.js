@@ -6,6 +6,8 @@
  */
 
 $(function(){
+	//日历控件
+	date();
 	
 	var testEditor;
 	//打开编辑器
@@ -18,6 +20,25 @@ $(function(){
 	
 	
 })
+
+
+//日历控件
+function date(){
+	$(".date_input").datetimepicker({
+		weekStart: 0, //一周从哪一天开始
+        todayBtn:  1, //
+        autoclose: 1,
+        todayHighlight: 1,
+        todayBtn:'linked',
+        startView: 2,
+        minView : "month",
+        forceParse: 0,
+        showMeridian: 1,
+        //language:'zh-CN',
+        format : 'yyyy-mm-dd',//设置日期格式,
+    });
+}
+
 
 //发布文章
 function publishArticle(){
@@ -101,7 +122,7 @@ function openEditor(){
 	testEditor = editormd({
 		id:"editormd",//注意：这里是上面DIV的id
 		width:"90%",
-		height:600,
+		height:"850px",
 		syncScrolling: "single",
 		path:"../../asstes/plugins/mdEditor/lib/",
 		emoji : true,
