@@ -12,4 +12,6 @@ public interface LoginService {
 	//获取用户
 	User getUser(String userName);
 	
+	boolean removeAllUser();
+	
 }

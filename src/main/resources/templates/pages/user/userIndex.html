@@ -43,7 +43,7 @@
     </ul>
     <form class="form-inline my-2 my-lg-0">
       <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" >Search</button>
     </form>
   </div>
 </nav>
@@ -85,7 +85,7 @@
     <!-- 博客正文 -->
     <div class="col-sm-8">
     	
-    	<div class="jumbotron">
+    	<div class="jumbotron" style="opacity:0.8;">
 		  <h1 class="display-3">Hello, Blog!</h1>
 		  <p class="lead">Create your own blog and follow this tutorial to get started!</p>
 		  <hr class="my-4">
@@ -97,7 +97,6 @@
     	<div class="card" style="width: 100%;">
 		  <div class="card-body">
 		    <h5 class="card-title">Test Blog Title</h5>
-		    <h6 class="card-subtitle mb-2 text-muted">blog</h6>
 		    <p class="card-text">test blog test</p>
 		    <a href="#" class="card-link">Read more-></a>
 		    <a href="#" class="card-link">modification</a>
@@ -119,8 +118,6 @@
 		</div>
     </div>
   </div>
-	
-	
 </div>	  
 
 	  
@@ -135,7 +132,12 @@
   <div class="row">
     <div class="col-md-1"></div>
     <div class="col-md-10 text-center">
-		 <input id="writeblog" type="text" class="form-control input-lg articleTitle" placeholder="请输入文章标题">
+		 <div class="input-group mb-3">
+		   <input id="writeblog" type="text" class="form-control" placeholder="Blog Title" aria-label="Blog Title" aria-describedby="basic-addon2">
+		   <div class="input-group-append">
+		     <a class="btn btn-primary" href="#" role="button">发布</a>
+		   </div>
+		 </div>
 	</div>
     <div class="col-md-1"></div>
   </div>
@@ -167,6 +169,7 @@
 <script type="text/javascript" src="/asstes/plugins/mdEditor/lib/underscore.min.js"></script>
 <script type="text/javascript" src="/asstes/plugins/mdEditor/editormd.js"></script>
 <script type="text/javascript" src="/asstes/plugins/mdEditor/lib/sequence-diagram.min.js"></script>
+
 <script type="text/javascript" src="/asstes/userIndex/js/userIndex.js"></script>
 
 

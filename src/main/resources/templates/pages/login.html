@@ -1,28 +1,50 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>登录</title>
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>login</title>
+
+<link rel="stylesheet" href="/asstes/plugins/bootstrap-4.4.1/css/bootstrap.min.css">
+<link href="/asstes/login/css/login.css" rel="stylesheet">
+
+   <style>
+     .bd-placeholder-img {
+       font-size: 1.125rem;
+       text-anchor: middle;
+       -webkit-user-select: none;
+       -moz-user-select: none;
+       -ms-user-select: none;
+       user-select: none;
+     }
+
+     @media (min-width: 768px) {
+       .bd-placeholder-img-lg {
+         font-size: 3.5rem;
+       }
+     }
+   </style>
 </head>
-<body>
-<h1>登录页</h1>
-<form>
-<p>用户名：<input class="register_username" type="text" name="username" /></p>
-<p>密码：<input class="register_password" autocomplete="on" type="password" name="password" /></p>
+<body class="text-center">
+
+
+<form class="form-signin">
+  <img class="mb-4" src="/favicon.ico" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">Please login</h1>
+  <input type="text" name="username" class="form-control login_username" placeholder="Username" required autofocus>
+  <input type="password" name="password" class="form-control login_password" placeholder="Password" required>
+  
+  <a class="btn btn-lg btn-primary btn-block login_btn">login</a>
+  <!-- 注册按钮 -->
+  <a class="btn btn-lg btn-primary btn-block register_btn">register</a>
+  <p class="mt-5 mb-3 text-muted">&copy; lv wen jin</p>
 </form>
-<button class="registerbtn">注册</button>
-
-<form>
-<p>用户名：<input class="login_username" type="text" name="username" /></p>
-<p>密码：<input class="login_password" autocomplete="on" type="password" name="password" /></p>
-</form>
-<button class="loginbtn">登录</button>
 
 
-<script type="text/javascript" src="../../asstes/plugins/jquery/jquery-3.4.1.min.js"></script>
-<script type="text/javascript" src="../../asstes/login/login.js"></script>
+
+
+<script type="text/javascript" src="/asstes/plugins/jquery/jquery-3.4.1.min.js"></script>
+<script type="text/javascript" src="/asstes/plugins/bootstrap-4.4.1/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/asstes/login/js/login.js"></script>
 </body>
-
-<a href="/hello">登录过了-></a>
-
 </html>

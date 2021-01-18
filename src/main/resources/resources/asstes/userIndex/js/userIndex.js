@@ -122,10 +122,11 @@ function openEditor(){
 	testEditor = editormd({
 		id:"editormd",//注意：这里是上面DIV的id
 		width:"90%",
-		height:"850px",
+		height:"600px",
 		syncScrolling: "single",
 		path:"../../asstes/plugins/mdEditor/lib/",
 		emoji : true,
-		imageUpload : false
+		imageUpload : false,
+		autoFocus: false
 	});
 }
