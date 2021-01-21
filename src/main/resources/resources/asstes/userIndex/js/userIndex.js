@@ -40,6 +40,8 @@ function date(){
 }
 
 
+
+
 //发布文章
 function publishArticle(){
 	$(".report_btn").on("click",function(){
@@ -60,16 +62,13 @@ function publishArticle(){
 		
 		$.ajax({
 			type:"post",
-			url:"../../article/article",
+			url:"/blog/blog",
 			data:{
-				articleTitle:$(".articleTitle").val(),
+				articleTitle:$("#writeblog").val(),
 				article:testEditor.getMarkdown()
 			},
 			success:function(data){
-				alert(data.flag);
-				url = window.location.pathname;
-				url = url.substring(url.lastIndexOf('/') + 1, url.length);
-				window.location.href="../course/"+url;
+				alert(data.msg);
 			}
 		});
 	});
