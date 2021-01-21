@@ -42,9 +42,9 @@ function date(){
 
 //发布文章
 function publishArticle(){
-	$(".publish_btn").on("click",function(){
+	$(".report_btn").on("click",function(){
 		
-		var articleTitle = $(".articleTitle").val();
+		var articleTitle = $("#writeblog").val();
 		
 		var article = testEditor.getMarkdown();
 		
