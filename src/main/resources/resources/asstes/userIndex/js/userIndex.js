@@ -18,9 +18,69 @@ $(function(){
 	//预览md
 	showMdArticle();
 	
+	//获取所有的文章
+	getMyArticle();
+	
 	
 })
 
+
+function getMyArticle(){
+	$.ajax({
+		type:"get",
+		url:"/blog/blog",
+		success:function(data){
+			if(data == undefined){
+				return;
+			}
+			for(var i=0;i<data.length;i++){
+				var title = "<h5 class='card-title'>"+data[i].title+"</h5>";
+				var article = "<p class='card-text'>"+data[i].arcitle.substr(0,30)+'...'+"</p>";
+				var readMore = "<a href='#' class='card-link'>Read more-></a>";
+				var modification = "<a href='#' class='card-link'>modification</a>";
+				var deleteArticle = "<a id="+data[i].id+" href='#' class='card-link text-danger deleteArticleLink'>delete</a>";
+				var date = "<span class='float-right'>"+data[i].createDate+"</span>";
+				$(".blogparent").append(
+					$("<div>",{
+						"class":"card",
+						"style":"width: 100%;margin-bottom:20px;",
+					}).append(
+						$("<div>",{
+							"class":'card-body'
+						}).append(title,article,readMore,modification,deleteArticle,date)
+					)
+				)
+			}
+			deleteArticleEven();
+		}
+	});
+}
+
+//为删除按钮绑定事件
+function deleteArticleEven(){
+	$(".deleteArticleLink").on('click',function(){
+		
+		var articleId = $(this).attr('id');
+		
+		var elem = $(this);
+		
+		console.log(elem.parent().parent());
+		
+		$("#exampleModalCenter").modal("show");
+		
+		$(".ensureDelete").on('click',function(){
+			$.ajax({
+				url:"/blog/blog/"+articleId,
+				type : "DELETE",
+				success:function(data){
+					alert(data.msg);
+					//移除删除的文章块
+					elem.parent().parent().remove();
+				}
+			});
+		});
+	});
+}
 
 //日历控件
 function date(){

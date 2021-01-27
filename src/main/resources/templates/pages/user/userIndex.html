@@ -83,7 +83,7 @@
     </div>
     
     <!-- 博客正文 -->
-    <div class="col-sm-8">
+    <div class="col-sm-8 blogparent">
     	
     	<div class="jumbotron" style="opacity:0.8;">
 		  <h1 class="display-3">Hello, Blog!</h1>
@@ -94,7 +94,7 @@
 		    <a class="btn btn-primary btn-lg" href="#writeblog" role="button">Create Blog</a>
 		  </p>
 		</div>
-    	<div class="card" style="width: 100%;">
+    	<!-- <div class="card" style="width: 100%;">
 		  <div class="card-body">
 		    <h5 class="card-title">Test Blog Title</h5>
 		    <p class="card-text">test blog test</p>
@@ -103,8 +103,29 @@
 		    <a href="#" class="card-link text-danger">delete</a>
 		    <span class="float-right">2021-12-12</span>
 		  </div>
-		</div>
+		</div> -->
     </div>
+    
+    <!-- 模态框，删除的确认 -->
+	<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+	  <div class="modal-dialog modal-dialog-centered" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h5 class="modal-title" id="exampleModalCenterTitle">提示</h5>
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+	          <span aria-hidden="true">&times;</span>
+	        </button>
+	      </div>
+	      <div class="modal-body">
+	                 确认删除？
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+	        <button type="button" class="btn btn-primary ensureDelete" data-dismiss="modal">确定</button>
+	      </div>
+	    </div>
+	  </div>
+	</div>
     
     <!-- 有多少人看过你 -->
     <div class="col-sm-2">

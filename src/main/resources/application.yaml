@@ -7,7 +7,12 @@ server: {port: 8002}
 
 # 数据库配置
 #更换环境
+#支持put与delete
 spring:
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
   mail:
     username: 972950811@qq.com
     password: yhtjjwmnitmebeif
