@@ -33,7 +33,7 @@ function getMyArticle(){
 			if(data == undefined){
 				return;
 			}
-			for(var i=0;i<data.length;i++){
+			for(var i=data.length-1;i>=0;i--){
 				var title = "<h5 class='card-title'>"+data[i].title+"</h5>";
 				var article = "<p class='card-text'>"+data[i].arcitle.substr(0,30)+'...'+"</p>";
 				var readMore = "<a href='#' class='card-link'>Read more-></a>";
@@ -51,6 +51,60 @@ function getMyArticle(){
 					)
 				)
 			}
+			
+			var count = 0;
+			if(data.length == 1){
+				var dateinfo = "<a href='#'>"+date+"</a>"
+				var articleCount = "<span class='badge badge-primary badge-pill'>1</span>"
+				$(".datelist").append($("<li>",{
+						"class":"list-group-item d-flex justify-content-between align-items-center"
+					}).append(dateinfo,articleCount)
+				);
+			}else{
+				
+				
+				var dateSet = [];
+				
+				for(var i =0 ;i<data.length;i++){
+					if($.inArray(data[i].createDate,dateSet) == -1){
+						dateSet.push(data[i].createDate);
+					}
+				}
+				
+				while(dateSet.length > 0){
+					for(var i =0 ;i<data.length;i++){
+						if(data[i].createDate == dateSet[0]){
+							count++;
+						}
+					}
+					var dateinfo = "<a href='#'>"+dateSet[0]+"</a>"
+					var articleCount = "<span class='badge badge-primary badge-pill'>"+count+"</span>"
+					$(".datelist").append($("<li>",{
+							"class":"list-group-item d-flex justify-content-between align-items-center"
+						}).append(dateinfo,articleCount)
+					);
+					count = 0;
+					dateSet.shift();
+				}
+				
+				/*for(var i= 0;i<=data.length;i++){
+					if(date == data[i].createDate){
+						count++;
+					}else if(date != data[i].createDate || data[i] == undefined){
+						var dateinfo = "<a href='#'>"+date+"</a>"
+						var articleCount = "<span class='badge badge-primary badge-pill'>"+count+"</span>"
+						$(".datelist").append($("<li>",{
+								"class":"list-group-item d-flex justify-content-between align-items-center"
+							}).append(dateinfo,articleCount)
+						);
+						date = data[i].createDate;
+						count=0;
+					}
+				}*/
+			}
+			
+			
+			
 			deleteArticleEven();
 		}
 	});
@@ -64,7 +118,7 @@ function deleteArticleEven(){
 		
 		var elem = $(this);
 		
-		console.log(elem.parent().parent());
+		//console.log(elem.parent().parent());
 		
 		$("#exampleModalCenter").modal("show");
 		
@@ -74,8 +128,7 @@ function deleteArticleEven(){
 				type : "DELETE",
 				success:function(data){
 					alert(data.msg);
-					//移除删除的文章块
-					elem.parent().parent().remove();
+					location.href="/hello";
 				}
 			});
 		});
@@ -129,11 +182,11 @@ function publishArticle(){
 			},
 			success:function(data){
 				alert(data.msg);
+				location.href="/hello";
 			}
 		});
 	});
 }
-
 
 //预览md
 function showMdArticle(){
